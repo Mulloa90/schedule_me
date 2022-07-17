@@ -12,7 +12,7 @@ hours.forEach(function (hour) {
   newRow.innerHTML = `<div class="hour col-md-1">${getHourText(hour)}</div>
     <textarea class="description col-md-10 ${getTextAreaClass(
       hour
-    )}" id='hour-${hour}' placeholder="Schedule task"></textarea>
+    )}" id='hour-${hour}' placeholder="Schedule task">${localStorage.getItem(`hour-${hour}`) || ''}</textarea>
     <button data-hour=${hour} class="savebtn col-md-1" onclick="saveText(this)">Save</button>`;
   mainContainer.append(newRow);
   //append it to the container
@@ -21,7 +21,9 @@ hours.forEach(function (hour) {
 function saveText(button) {
   //   console.log();
   var textArea = document.getElementById(`hour-${button.dataset.hour}`);
+  console.log(`hour-${button.dataset.hour}`)
   console.log(textArea.value);
+  localStorage.setItem(`hour-${button.dataset.hour}`, textArea.value);
 }
 
 function getTextAreaClass(hour) {
