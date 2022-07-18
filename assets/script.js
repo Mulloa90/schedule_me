@@ -2,11 +2,11 @@ var dt = new Date();
 var currentHour = dt.getHours();
 document.getElementById("date-time").innerHTML = dt;
 var mainContainer = document.getElementById("main-container");
-
+//created string array for hours of operation
 var hours = ["08", "09", "10", "11", "12", "13", "14", "15", "16", "17"];
 
 hours.forEach(function (hour) {
-  //create the html block
+  //inserted html block to run multiple times
   var newRow = document.createElement("div");
   newRow.classList.add("row", "time-block");
   newRow.innerHTML = `<div class="hour col-md-1">${getHourText(hour)}</div>
@@ -15,9 +15,9 @@ hours.forEach(function (hour) {
     )}" id='hour-${hour}' placeholder="Schedule task">${localStorage.getItem(`hour-${hour}`) || ''}</textarea>
     <button data-hour=${hour} class="savebtn col-md-1" onclick="saveText(this)">Save</button>`;
   mainContainer.append(newRow);
-  //append it to the container
+  //append it to the container in html
 });
-
+//to save data 
 function saveText(button) {
   //   console.log();
   var textArea = document.getElementById(`hour-${button.dataset.hour}`);
@@ -25,7 +25,7 @@ function saveText(button) {
   console.log(textArea.value);
   localStorage.setItem(`hour-${button.dataset.hour}`, textArea.value);
 }
-
+// to run correct color code for hours past, present and future 
 function getTextAreaClass(hour) {
   if (hour < currentHour) {
     return "past";
@@ -35,7 +35,7 @@ function getTextAreaClass(hour) {
     return "future";
   }
 }
-
+// function to get correct hour to display
 function getHourText(hour) {
   switch (hour) {
     case "08":
@@ -61,11 +61,4 @@ function getHourText(hour) {
   }
 }
 
-/*WHEN I view the timeblocks for that day
-THEN each timeblock is color coded to indicate whether it is in the past, present, or future
-WHEN I click into a timeblock
-THEN I can enter an event
-WHEN I click the save button for that timeblock
-THEN the text for that event is saved in local storage
-WHEN I refresh the page
-THEN the saved events persist*/
+
